@@ -1,0 +1,38 @@
+
+services:
+  web1:
+    build: ./app
+    container_name: web1
+    networks:
+      - load_balancer_network
+  
+  web2:
+    build: ./app
+    container_name: web2
+    networks:
+      - load_balancer_network
+
+  web3:
+    build: ./app
+    container_name: web3
+    networks:
+      - load_balancer_network
+
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "80:80"
+      - "8090:8090"
+    depends_on:
+      - web1
+      - web2
+      - web3
+    networks:
+      - load_balancer_network
+
+networks:
+  load_balancer_network:
+    driver: bridge
