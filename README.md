@@ -47,11 +47,7 @@ backend web_servers
 ---
 
 ## Ejecución del Proyecto
-1. Clonar el repositorio y crear los archivos necesarios:
-   ```sh
-   mkdir -p app haproxy
-   touch app/app.py app/Dockerfile haproxy/haproxy.cfg docker-compose.yml
-   ```
+1. Clonar el repositorio
 2. Construir y levantar los contenedores:
    ```sh
    docker-compose up -d --build
